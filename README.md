@@ -1,4 +1,4 @@
-# 🎯 Boredom Buster
+# 🎯 SideQuest
 
 <p align="center">
   <strong>A modern, full-stack MERN application that turns boredom into memorable moments with smart activity recommendations, interactive card swiping, weekly challenges, and gamified progress tracking.</strong>
