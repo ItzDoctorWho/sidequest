@@ -1,0 +1,429 @@
+@import "tailwindcss";
+
+/* Theme is the `data-theme` attribute on <html> (set before first paint in index.html). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ------------------------------------------------------------------ fonts (self-hosted, Latin subset) */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/SpaceGrotesk-latin.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------ design tokens
+   SideQuest design system. Components use the semantic names below
+   (bg-page, bg-card, text-fg, border-line, bg-action ...) and never raw hex values,
+   so both themes stay complete by construction.
+
+   Colour roles
+   - Quest Lime   : primary actions, selected states (dark text on it, never white)
+   - Adventure Purple : secondary actions, brand decoration
+   - Energy Orange : rewards and special moments only
+   - Sky Blue     : category accents only
+*/
+:root {
+  /* Brand */
+  --sq-lime: #d6ff54;
+  --sq-purple: #6c4cff;
+  --sq-orange: #ff8a3d;
+  --sq-blue: #3882f6;
+
+  /* Light theme */
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --surface-muted: #eef1f6;
+  --text-primary: #151923;
+  --text-secondary: #626a79;
+  --border: #e3e6ed;
+  --border-strong: #c9cedb;
+
+  --action: #d6ff54;
+  --action-hover: #c7f23a;
+  --on-action: #151923;
+  --action-ring: inset 0 0 0 1px rgb(21 25 35 / 0.16); /* keeps lime visible on white */
+  --secondary: #6c4cff;
+  --secondary-hover: #5a3beb;
+  --on-secondary: #ffffff;
+  --accent-text: #5a3beb; /* links and small accents: purple on light, lime on dark */
+  --focus: #6c4cff;
+  --danger: #c4283c;
+  --on-danger: #ffffff;
+  --reward: #c2570c; /* orange, text-safe on light */
+  --reward-fill: #ff8a3d;
+
+  --sq-night: #0f1117;
+  --sq-slate: #2a2f3a;
+  --sq-lime-shade: #b4e033; /* second facet of the logo arrow */
+
+  --toast-bg: #151923;
+  --toast-fg: #f5f7fa;
+
+  /* Category accents: subtle, used for icons and cover tints only. */
+  --cat-blue: #2f6fe0;
+  --cat-purple: #6c4cff;
+  --cat-orange: #d1600c;
+
+  --topo: rgb(108 76 255 / 0.13);
+  --glow: rgb(108 76 255 / 0.1);
+  --shadow-pop: 0 10px 30px -12px rgb(21 25 35 / 0.25);
+
+  /* Radius (guide 10.2) */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-field: 12px;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-primary: #0f1117;
+  --bg-secondary: #171a23;
+  --surface: #2a2f3a;
+  --card: #171a23;
+  --surface-muted: #1f232e;
+  --text-primary: #f5f7fa;
+  --text-secondary: #9298a5;
+  --border: #303543;
+  --border-strong: #434a5c;
+
+  --action: #d6ff54;
+  --action-hover: #e3ff88;
+  --on-action: #0f1117;
+  --action-ring: none;
+  --secondary: #6c4cff;
+  --secondary-hover: #7d62ff;
+  --on-secondary: #ffffff;
+  --accent-text: #d6ff54;
+  --focus: #d6ff54;
+  --danger: #ff7b84;
+  --on-danger: #0f1117;
+  --reward: #ff9d5c;
+  --reward-fill: #ff8a3d;
+
+  --toast-bg: #2a2f3a;
+  --toast-fg: #f5f7fa;
+
+  --cat-blue: #6aa3ff;
+  --cat-purple: #a08bff;
+  --cat-orange: #ff9d5c;
+
+  --topo: rgb(122 96 255 / 0.27);
+  --glow: rgb(108 76 255 / 0.2);
+  --shadow-pop: 0 14px 36px -14px rgb(0 0 0 / 0.7);
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Tailwind utilities that point at the tokens above. `inline` keeps them live-switching with the theme. */
+@theme inline {
+  --color-lime: var(--sq-lime);
+  --color-purple: var(--sq-purple);
+  --color-orange: var(--sq-orange);
+  --color-blue: var(--sq-blue);
+
+  --color-page: var(--bg-primary);
+  --color-page-alt: var(--bg-secondary);
+  --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-muted-fill: var(--surface-muted);
+  --color-fg: var(--text-primary);
+  --color-fg-muted: var(--text-secondary);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-action: var(--action);
+  --color-on-action: var(--on-action);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent-text);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-reward: var(--reward);
+  --color-reward-fill: var(--reward-fill);
+  --color-toast: var(--toast-bg);
+  --color-on-toast: var(--toast-fg);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-field: 12px;
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  body {
+    @apply min-h-dvh bg-page font-sans text-base text-fg antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-balance;
+  }
+  h1 {
+    @apply font-bold;
+  }
+  h2,
+  h3 {
+    @apply font-semibold;
+  }
+  p {
+    @apply text-pretty;
+  }
+  button:not(:disabled),
+  [role="tab"] {
+    cursor: pointer;
+  }
+  ::selection {
+    background: var(--sq-purple);
+    color: #fff;
+  }
+  /* Theme switch: drop all transitions for one frame so colours do not smear. */
+  html.theme-switching *,
+  html.theme-switching *::before,
+  html.theme-switching *::after {
+    transition: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ components */
+@layer components {
+  .page {
+    @apply mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-10;
+  }
+
+  .surface {
+    @apply rounded-lg border border-line bg-card;
+  }
+
+  .muted {
+    @apply text-fg-muted;
+  }
+
+  /* Buttons (guide 10.4). 44px minimum touch target. */
+  .btn {
+    @apply focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold whitespace-nowrap
+      disabled:cursor-not-allowed disabled:opacity-50;
+    /* Press compresses, release springs back past 1 so it "expands". */
+    transition-property: background-color, border-color, color, box-shadow, scale;
+    transition-timing-function: ease-out, ease-out, ease-out, ease-out, cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-duration: 150ms, 150ms, 150ms, 150ms, 180ms;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn:enabled:active,
+    .icon-btn:enabled:active {
+      scale: 0.96;
+    }
+  }
+  .btn-lg {
+    @apply min-h-12 px-6 py-3 text-base;
+  }
+  .btn-sm {
+    @apply min-h-9 px-3.5 py-1.5;
+  }
+  .btn-primary {
+    @apply bg-action text-on-action font-bold hover:bg-[var(--action-hover)];
+    box-shadow: var(--action-ring);
+  }
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-[var(--secondary-hover)];
+  }
+  .btn-outline {
+    @apply border border-line-strong bg-transparent text-fg hover:bg-muted-fill;
+  }
+  .btn-ghost {
+    @apply text-fg-muted hover:bg-muted-fill hover:text-fg;
+  }
+  .btn-danger {
+    @apply bg-danger text-[var(--on-danger)] hover:opacity-90;
+  }
+  .icon-btn {
+    @apply focus-ring inline-flex size-10 items-center justify-center rounded-md text-fg-muted hover:bg-muted-fill hover:text-fg;
+    transition: background-color 150ms ease-out, color 150ms ease-out, scale 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Forms (inputs 12px) */
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-fg;
+  }
+  .field {
+    @apply min-h-11 w-full rounded-field border border-line-strong bg-surface px-3.5 py-2 text-sm text-fg placeholder:text-fg-muted
+      focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-focus disabled:opacity-50;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-muted-fill px-2.5 py-1 text-xs font-semibold text-fg-muted;
+  }
+  .badge-purple {
+    @apply bg-secondary text-white;
+  }
+  .badge-reward {
+    @apply bg-reward-fill text-on-action;
+  }
+
+  /* Chips: small meta facts on a quest card (icon + value). */
+  .fact {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm font-medium text-fg;
+  }
+  .fact svg {
+    @apply size-4 text-fg-muted;
+  }
+
+  /* Decorative topographic lines. Always behind content, always low contrast. */
+  .topo {
+    @apply pointer-events-none absolute inset-0;
+    background: var(--topo);
+    -webkit-mask: url("/brand/topographic.svg") center / cover no-repeat;
+    mask: url("/brand/topographic.svg") center / cover no-repeat;
+  }
+
+  /* One soft purple glow in a corner. Atmosphere, not a gradient fill. */
+  .hero-glow {
+    background: radial-gradient(60% 90% at 90% 0%, var(--glow), transparent 70%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold text-accent;
+  }
+
+  /* Category accent: set the colour once, reuse it for icon tile and cover tint. */
+  .cat-blue {
+    --cat: var(--cat-blue);
+  }
+  .cat-purple {
+    --cat: var(--cat-purple);
+  }
+  .cat-orange {
+    --cat: var(--cat-orange);
+  }
+  .cat-icon {
+    background: color-mix(in srgb, var(--cat) 14%, transparent);
+    color: var(--cat);
+  }
+  .cat-cover {
+    background: color-mix(in srgb, var(--cat) 16%, var(--card));
+    color: var(--cat);
+  }
+}
+
+/* ------------------------------------------------------------------ motion */
+/* Enter: fade only under reduced motion, fade + small lift otherwise. */
+@keyframes enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes enter-lift {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.enter {
+  animation: enter 150ms ease-out both;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation-name: enter-lift;
+  }
+}
+
+/* Quest reveal: a card dealt from the deck (350ms, ease-out).
+   Fill mode is `backwards`, never `both`/`forwards`: a finished animation that keeps its end
+   values overrides inline styles, which would stop the card following a drag. */
+@keyframes deal {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(-2deg) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.deal {
+  animation: enter 200ms ease-out backwards;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .deal {
+    animation: deal 380ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+}
+
+/* Loading compass. Static under reduced motion. */
+@keyframes compass-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .compass-spin {
+    animation: compass-spin 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+}
+
+/* Quest completed: a short star burst. Decorative, hidden under reduced motion. */
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--a)) translateY(0) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateY(-26px) scale(1);
+  }
+}
+.burst-star {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  opacity: 0;
+  animation: burst 650ms ease-out both;
+  animation-delay: var(--d, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .burst-star {
+    display: none;
+  }
+}
