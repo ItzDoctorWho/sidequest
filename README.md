@@ -1,7 +1,16 @@
-# 🎯 Boredom Buster
+# 🧭 SideQuest
 
 <p align="center">
-  <strong>A modern, full-stack MERN application that turns boredom into memorable moments with smart activity recommendations, interactive card swiping, weekly challenges, and gamified progress tracking.</strong>
+  <strong>Break the routine. Discover engaging micro-adventures, swipe through personalized activities, conquer weekly challenges, and level up your life.</strong>
+</p>
+
+<p align="center">
+  <a href="https://your-sidequest.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Live_Demo-your--sidequest.vercel.app-6366F1?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+  <a href="https://sidequest-51sy.onrender.com/api/health" target="_blank">
+    <img src="https://img.shields.io/badge/API_Status-Online-10B981?style=for-the-badge&logo=render&logoColor=white" alt="API Status" />
+  </a>
 </p>
 
 <p align="center">
@@ -12,52 +21,75 @@
   <img src="https://img.shields.io/badge/Express-4.21-000000?style=flat-square&logo=express&logoColor=white" alt="Express" />
   <img src="https://img.shields.io/badge/MongoDB-Mongoose%208.x-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB" />
   <img src="https://img.shields.io/badge/TailwindCSS-v4.0-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS v4" />
+  <img src="https://img.shields.io/badge/Tests-41%20Passed-success?style=flat-square&logo=jest&logoColor=white" alt="Jest Tests" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License" />
 </p>
 
 ---
 
+## 🌐 Live Deployments
+
+- **Frontend Application (Vercel)**: [https://your-sidequest.vercel.app](https://your-sidequest.vercel.app)
+- **Backend REST API (Render)**: [https://sidequest-51sy.onrender.com/api](https://sidequest-51sy.onrender.com/api)
+- **API Health Endpoint**: [https://sidequest-51sy.onrender.com/api/health](https://sidequest-51sy.onrender.com/api/health)
+
+---
+
 ## 📖 Table of Contents
 
+- [Overview](#-overview)
 - [Key Features](#-key-features)
 - [Architecture & Tech Stack](#-architecture--tech-stack)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
-  - [Environment Configuration](#environment-configuration)
-  - [Installation & Running Locally](#installation--running-locally)
-- [Testing](#-testing)
-- [API Reference](#-api-reference)
+  - [Environment Variables](#environment-variables)
+  - [Local Installation](#local-installation)
+- [Testing & Quality Assurance](#-testing--quality-assurance)
+- [REST API Contract](#-rest-api-contract)
   - [Authentication](#auth)
   - [Suggestions](#suggestions)
   - [Activities](#activities)
   - [Weekly Challenges](#challenges)
-  - [User Statistics](#stats)
-- [Data Models](#-data-models)
-- [Security & Best Practices](#-security--best-practices)
+  - [Statistics & Badges](#stats)
+- [Performance & Resilience Highlights](#-performance--resilience-highlights)
 - [License](#-license)
+
+---
+
+## 💡 Overview
+
+**SideQuest** (formerly *Boredom Buster*) is a full-stack MERN application engineered to solve decision paralysis when you're looking for something engaging to do. 
+
+Drawing from curated external activity engines, SideQuest packages activities into an interactive **Tinder-style deck**, where users can swipe through micro-adventures with real-time feedback, add custom entries, track weekly completion streaks, and unlock achievements on a personalized analytics dashboard.
 
 ---
 
 ## ✨ Key Features
 
-- **🔥 Tinder-Style Discovery**: Swipe right to save an activity to your personal backlog, or swipe left to skip. Fully animated with touch, drag, and circular action buttons (`Skip`, `Generate`, `Save`).
-- **🎯 Smart Filtering & 15-Minute Mode**: Filter by category (`education`, `recreational`, `social`, `charity`, `cooking`, `relaxation`, `busywork`), group size (1 to 8), or toggle the instant *"I only have 15–30 minutes"* pill.
-- **🔐 Secure Authentication & Persistence**: Stateless JWT authentication with bcrypt password hashing. Session state survives refreshes through Redux state rehydration and `localStorage`.
-- **📋 Backlog Management ("My List")**:
-  - Filter across **Saved**, **Done**, and **Skipped** tabs.
-  - Personal notes editor and 5-star rating system.
-  - Custom Activity modal for tracking offline, custom experiences.
-  - **Decision Spinner (Fortune Wheel)**: Let fate pick when you can't choose what to do!
+- **🃏 Tinder-Style Swiping Deck**:
+  - **Swipe Right**: Accept quest and save it into your personal backlog.
+  - **Swipe Left**: Skip card cleanly to reveal the next adventure.
+  - **Smooth Physics**: Velocity-based tilt animations with mouse, touch, or arrow key controls.
+  - **Circular Quick Controls**: Prominent central **Roll / Generate** button with quick Skip (`✕`) and Save (`♥`) buttons.
+- **⚡ Smart Filtering & Instant Mode**:
+  - Filter across 7 categories: `education`, `recreational`, `social`, `charity`, `cooking`, `relaxation`, `busywork`.
+  - Filter by group size (solo to 8 people).
+  - Quick pill filter: *"I only have 15–30 minutes"*.
+- **📋 Backlog Management ("Your Adventures")**:
+  - Organised tabs: **Accepted** and **Completed**.
+  - Rate activities with a 5-star rating system and add personal reflections or equipment notes.
+  - **Custom Activity Creator**: Create and track your own offline adventures.
+  - **Decision Spinner (Wheel of Fate)**: Let the built-in fortune wheel randomly choose from your accepted quests when you can't decide.
 - **🏆 Weekly Challenges**:
-  - Commit to 3–5 activities per week with dynamic progress bars and countdown timers.
-  - Auto-generate challenges directly from your saved backlog.
-  - Earn **+50 Bonus XP** and unlock exclusive achievement trophies upon completion.
+  - Automatically or manually generate a weekly challenge (3–5 tasks) with deadline countdowns.
+  - Earning **+50 Bonus XP** and unlocking the exclusive `Challenge Champion` badge upon finishing.
 - **📊 Visual Analytics Dashboard**:
-  - Interactive Recharts bar chart showing daily activity completion over the last 7 days.
-  - Category distribution pie chart.
-  - Trophy case highlighting unlocked achievements and active streaks.
-- **🌓 Flawless Dark/Light Mode**: Full custom dark mode theming configured for Tailwind CSS v4 with persisted user preference.
+  - Recharts bar chart showing daily activity completions over the past 7 days.
+  - Category distribution pie chart with dynamic tooltips.
+  - Trophy case with locked/unlocked achievement badges.
+- **🌓 Native Dark / Light Mode**:
+  - Custom Tailwind CSS v4 theming supporting system defaults and user toggles, persisted in `localStorage`.
 
 ---
 
@@ -65,67 +97,68 @@
 
 ### Frontend (`client/`)
 - **Framework**: React 19 + Vite 6
-- **State Management**: Redux Toolkit (RTK) (`createSlice`, `createAsyncThunk`)
+- **State Management**: Redux Toolkit (RTK) (`store.js`, slices with `createAsyncThunk`)
 - **Routing**: React Router DOM v7 with `ProtectedRoute` guards
-- **Styling**: Tailwind CSS v4 with `@custom-variant dark` support
+- **Styling**: Tailwind CSS v4 with custom `@custom-variant dark` support
 - **Data Visualization**: Recharts 2.x
 - **Icons**: Lucide React
-- **HTTP Client**: Axios with centralized request/response interceptors for Bearer JWT injection
+- **HTTP Client**: Axios with centralized request interceptors (Bearer JWT) and error response normalization
 
 ### Backend (`server/`)
-- **Runtime**: Node.js (ES Modules)
+- **Runtime**: Node.js 22.x (ES Modules)
 - **Framework**: Express 4.x
-- **Database & ODM**: MongoDB with Mongoose 8.x
-- **Authentication**: JSON Web Tokens (`jsonwebtoken`) + `bcryptjs`
+- **Database**: MongoDB with Mongoose 8.x
+- **Authentication**: JWT (`jsonwebtoken`) with `bcryptjs` password hashing
 - **Validation**: Schema validation via `Zod`
-- **Caching**: `node-cache` (10-minute cache for external Bored API queries)
-- **Security & Logging**: Helmet, CORS, Morgan
+- **Caching**: `node-cache` (10-minute cache for external Bored API queries) + in-memory Set deduplication
+- **Security & Logging**: Helmet, CORS with auto-protocol normalization, Morgan
 
 ---
 
 ## 📂 Project Structure
 
 ```
-react-project-ds/
+sidequest/
 ├── server/
 │   ├── src/
 │   │   ├── config/             # DB connection & environment variables
 │   │   │   ├── db.js
 │   │   │   └── env.js
-│   │   ├── models/             # Mongoose schemas
+│   │   ├── models/             # Mongoose schemas (User, Activity, Challenge)
 │   │   │   ├── User.js
 │   │   │   ├── Activity.js
 │   │   │   └── Challenge.js
-│   │   ├── routes/             # Express API routes
+│   │   ├── routes/             # Express route definitions
 │   │   │   ├── auth.js
 │   │   │   ├── suggestions.js
 │   │   │   ├── activities.js
 │   │   │   ├── challenges.js
 │   │   │   └── stats.js
-│   │   ├── controllers/        # Request handlers
+│   │   ├── controllers/        # Route controllers
 │   │   │   ├── authController.js
 │   │   │   ├── suggestionController.js
 │   │   │   ├── activityController.js
 │   │   │   └── challengeController.js
 │   │   ├── services/           # Business logic & 3rd party APIs
-│   │   │   ├── boredApi.js     # Bored API proxy with in-memory caching
+│   │   │   ├── boredApi.js     # External Bored API service with in-memory caching
+│   │   │   ├── seenKeys.js     # Fast seen-keys deduplicator with fallback circuit-breaker
 │   │   │   ├── challengeService.js
 │   │   │   └── statsService.js
 │   │   ├── middleware/         # Custom Express middlewares
-│   │   │   ├── auth.js         # JWT verification sentinel
+│   │   │   ├── auth.js         # JWT sentinel verification
 │   │   │   ├── error.js        # Central error & 404 handlers
 │   │   │   └── validate.js     # Zod request validators
-│   │   ├── app.js              # Express app definition
-│   │   └── server.js           # Server entry point
-│   ├── tests/                  # Automated integration & unit tests
+│   │   ├── app.js              # Express app definition & CORS policy
+│   │   └── server.js           # Server bootstrap
+│   ├── tests/                  # Automated integration & resilience tests (41 tests)
 │   ├── .env.example
 │   └── package.json
 │
 ├── client/
 │   ├── src/
 │   │   ├── api/
-│   │   │   └── axiosClient.js  # Preconfigured Axios instance with JWT interceptors
-│   │   ├── redux/              # Centralized Redux store and slices
+│   │   │   └── axiosClient.js  # Central Axios instance with Bearer token interceptor
+│   │   ├── redux/              # Centralized Redux Toolkit store and slices
 │   │   │   ├── store.js
 │   │   │   ├── authSlice.js
 │   │   │   ├── activitiesSlice.js
@@ -133,7 +166,7 @@ react-project-ds/
 │   │   │   ├── statsSlice.js
 │   │   │   ├── suggestionSlice.js
 │   │   │   └── uiSlice.js
-│   │   ├── components/         # Shared UI & feature components
+│   │   ├── components/         # Shared UI components
 │   │   │   ├── brand/
 │   │   │   ├── ActivityItemCard.jsx
 │   │   │   ├── CustomActivityModal.jsx
@@ -173,78 +206,82 @@ react-project-ds/
 
 - **Node.js**: `v20.x` or higher (`v22.x` recommended)
 - **npm**: `v10.x` or higher
-- **MongoDB**: A running local instance (`mongodb://127.0.0.1:27017`) or a MongoDB Atlas URI
+- **MongoDB**: Local MongoDB instance (`mongodb://127.0.0.1:27017`) or MongoDB Atlas URI
 
 ---
 
-### Environment Configuration
+### Environment Variables
 
-Create a `.env` file inside the `server/` directory:
-
-```bash
-cp server/.env.example server/.env
-```
-
-Edit `server/.env` with your settings:
+#### 1. Backend (`server/.env`)
+Copy `server/.env.example` to `server/.env`:
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/boredom-buster
+MONGODB_URI=mongodb://127.0.0.1:27017/sidequest
 JWT_SECRET=your_super_secret_jwt_key_here
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
+> **Production note on Render**: Set `CLIENT_URL=https://your-sidequest.vercel.app` (always include `https://`).
+
+#### 2. Frontend (`client/.env.production` or Vercel Environment Variables)
+```env
+VITE_API_URL=https://sidequest-51sy.onrender.com/api
+```
+
 ---
 
-### Installation & Running Locally
+### Local Installation
 
-#### 1. Start the Backend API
+#### Start the Server
 ```bash
 cd server
 npm install
 npm run dev
 ```
-The server will start on **`http://localhost:5000`** with live reloading.
+Backend will start on **`http://localhost:5000`** with live reloading.
 
-#### 2. Start the Frontend Client
+#### Start the Client
 In a separate terminal:
 ```bash
 cd client
 npm install
 npm run dev
 ```
-The client will launch on **`http://localhost:5173`**.
+Frontend will launch on **`http://localhost:5173`**.
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing & Quality Assurance
 
-The backend includes a comprehensive Jest test suite verifying routing, authentication, Zod validation, deduplication, weekly challenges, and analytics.
+The backend features a comprehensive test suite (41 tests) covering unit operations, authentication, Zod validation, weekly challenges, and database failover resilience:
 
 ```bash
 cd server
 npm test
 ```
 
-**Results:**
 ```text
+PASS tests/resilience.test.js
 PASS tests/stats.test.js
+PASS tests/suggestions.test.js
 PASS tests/challenges.test.js
 PASS tests/activities.test.js
-PASS tests/suggestions.test.js
-PASS tests/health.test.js
 PASS tests/auth.test.js
+PASS tests/health.test.js
 
-Test Suites: 6 passed, 6 total
-Tests:       20 passed, 20 total
+Test Suites: 7 passed, 7 total
+Tests:       41 passed, 41 total
+Snapshots:   0 total
+Time:        16.1 s
 ```
 
 ---
 
-## 📡 API Reference
+## 📡 REST API Contract
 
-All protected endpoints require the HTTP header:  
+All protected endpoints require the header:  
 `Authorization: Bearer <token>`
 
 ### Auth
@@ -252,79 +289,45 @@ All protected endpoints require the HTTP header:
 | :--- | :--- | :--- | :--- |
 | `POST` | `/api/auth/register` | Public | Register user (`name`, `email`, `password`) |
 | `POST` | `/api/auth/login` | Public | Login with email and password |
-| `GET` | `/api/auth/me` | Protected | Retrieve authenticated profile, XP, streak |
+| `GET` | `/api/auth/me` | Protected | Fetch current profile, XP, streak, badges |
 
 ### Suggestions
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/api/suggestions/random` | Protected | Get single suggestion (excluding seen items) |
-| `GET` | `/api/suggestions/browse` | Protected | Get full filtered list of available activities |
+| `GET` | `/api/suggestions/random` | Protected/Public | Get random suggestion (auto-skips seen keys) |
+| `GET` | `/api/suggestions/browse` | Protected/Public | Fetch full filtered list of available activities |
 
 ### Activities
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/api/activities` | Protected | Fetch user's activities (query: `status`, `type`) |
 | `POST` | `/api/activities` | Protected | Save suggestion or create custom activity |
-| `PATCH` | `/api/activities/:id` | Protected | Update activity status, notes, or 1–5 rating |
-| `DELETE` | `/api/activities/:id` | Protected | Remove an activity from user's list |
+| `PATCH` | `/api/activities/:id` | Protected | Update status (`saved`, `done`), notes, or 1–5 rating |
+| `DELETE` | `/api/activities/:id` | Protected | Remove activity from user's backlog |
 
 ### Challenges
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/api/challenges/current` | Protected | Get active weekly challenge with progress |
-| `POST` | `/api/challenges` | Protected | Create manual or auto-generated challenge |
+| `POST` | `/api/challenges` | Protected | Create challenge (manual or auto-generated) |
 
 ### Stats
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/api/stats` | Protected | Returns 7-day completion timeline, category breakdown & badges |
+| `GET` | `/api/stats` | Protected | Retrieve weekly analytics, category breakdown & badges |
 
 ---
 
-## 📊 Data Models
+## ⚡ Performance & Resilience Highlights
 
-### User Schema
-```typescript
-{
-  name: string;
-  email: string;            // unique, lowercase
-  passwordHash: string;     // bcrypt hashed
-  xp: number;               // awarded on activity (+15) and challenge (+50)
-  streak: number;           // consecutive active days
-  lastActiveDate: Date;
-  badges: string[];         // e.g. ["First Step", "Challenge Champion"]
-}
-```
-
-### Activity Schema
-```typescript
-{
-  user: ObjectId;           // Ref -> User
-  apiKey: string | null;    // External Bored API key (null for custom)
-  activity: string;         // Title / description
-  type: string;             // education | recreational | social | etc.
-  participants: number;
-  price: number;            // 0.0 to 1.0 (Mapped to Free / Cheap / Moderate / Pricey)
-  availability: number;     // 0.0 to 1.0 (Mapped to Rare / Moderate / Common)
-  duration: string;         // "minutes" | "hours" | "days"
-  status: "saved" | "done" | "skipped";
-  notes: string;
-  rating: number;           // 1 to 5 stars
-  completedAt: Date | null;
-  isCustom: boolean;
-}
-```
-> **Deduplication**: Features a partial unique compound index `{ user: 1, apiKey: 1 }` to guarantee no duplicate external API saves per user.
-
----
-
-## 🛡 Security & Best Practices
-
-- **Zero Client-Side API Keys**: Browser never calls third-party APIs directly; all requests flow through Express.
-- **Strict Input Sanitization**: Server-side validation via `Zod` blocks injection attacks and malformed payloads.
-- **Stateless Authorization**: JWT headers are verified per request using standardized status codes (`401 Unauthorized`, `403 Forbidden`).
-- **HTTP Security Headers**: `helmet` and constrained `cors` policies configured out-of-the-box.
-- **Centralized Error Handling**: Uncaught rejections and errors return predictable `{ message: string }` payloads without leaking stack traces in production.
+1. **Zero Client-Side API Keys**: Third-party APIs are proxied and sanitized through Express.
+2. **Circuit-Breaker & Seen-Key Caching** ([`seenKeys.js`](server/src/services/seenKeys.js)):
+   - Avoids repetitive Mongo queries on swiping with a 60-second in-memory Set.
+   - Enforces a **1.5s query timeout**: if MongoDB Atlas sleeps or responds slowly, suggestions never hang.
+3. **Compound Sparse Indexes**:
+   - `{ user: 1, apiKey: 1 }` prevents duplicate saves of external activities while allowing unlimited custom entries.
+4. **Adaptive CORS Engine**:
+   - Automatically normalizes protocols, strips trailing slashes, and accepts Vercel preview branch deployments without manual reconfiguration.
 
 ---
 

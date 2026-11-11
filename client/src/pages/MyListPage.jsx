@@ -12,8 +12,7 @@ import EmptyState from '../components/EmptyState.jsx';
 // Tab ids match the activity `status` values the API stores.
 const TABS = [
   { id: 'saved', label: 'Accepted' },
-  { id: 'done', label: 'Completed' },
-  { id: 'skipped', label: 'Maybe later' }
+  { id: 'done', label: 'Completed' }
 ];
 
 const EMPTY = {
@@ -26,11 +25,6 @@ const EMPTY = {
     title: 'No quests completed yet',
     text: 'Finish one and it lands here with your rating and notes.',
     action: { label: 'See accepted quests', tab: 'saved' }
-  },
-  skipped: {
-    title: 'Nothing set aside',
-    text: 'Quests you pass on are kept here in case you change your mind.',
-    action: { label: 'Explore quests', to: '/' }
   }
 };
 

@@ -69,6 +69,12 @@ export const HomePage = () => {
       return;
     }
 
+    // Swiping left just skips to the next activity without saving to any list.
+    if (decision === 'skipped') {
+      loadNext();
+      return;
+    }
+
     // Move on right away; the decision is saved in the background.
     loadNext();
 
@@ -92,7 +98,7 @@ export const HomePage = () => {
       dispatch(
         addToast({
           tone: 'error',
-          message: `Couldn't ${decision === 'saved' ? 'accept' : 'set aside'} that quest. It'll come around again.`
+          message: "Couldn't accept that quest. It'll come around again."
         })
       );
       dispatch(restoreSuggestion(activity)); // back to the front of the line, not lost
@@ -101,7 +107,7 @@ export const HomePage = () => {
 
     dispatch(
       addToast({
-        message: decision === 'saved' ? `Quest accepted: ${activity.activity}` : 'Saved for maybe later',
+        message: `Quest accepted: ${activity.activity}`,
         action: { label: 'Undo', type: 'undo', activityId: result.payload._id }
       })
     );
@@ -113,7 +119,7 @@ export const HomePage = () => {
   const swipeRight = () => (cardRef.current ? cardRef.current.swipeRight() : handleSave());
   const swipeLeft = () => (cardRef.current ? cardRef.current.swipeLeft() : handleSkip());
 
-  // Keyboard: ← maybe later, → accept.
+  // Keyboard: ← skip, → accept.
   useEffect(() => {
     if (!canSwipe) return undefined;
     const onKeyDown = (e) => {
@@ -209,9 +215,9 @@ export const HomePage = () => {
               {/* Sticky on phones so the main actions never fall below the fold. */}
               <div className="sticky bottom-0 z-30 -mx-4 mt-6 border-t border-line bg-page px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:static sm:z-auto sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0">
                 <div className="flex items-center justify-center gap-3">
-                  <button type="button" onClick={swipeLeft} className="btn btn-outline btn-lg">
+                  <button type="button" onClick={swipeLeft} className="btn btn-outline btn-lg" aria-label="Skip quest">
                     <X className="size-5" aria-hidden="true" />
-                    Maybe later
+                    Skip
                   </button>
                   <button type="button" onClick={swipeRight} className="btn btn-primary btn-lg">
                     Accept quest

@@ -216,7 +216,7 @@ export const QuestCard = forwardRef(({ activity, next, instant = false, onSwipeR
           style={{ opacity: skipOpacity }}
           className="pointer-events-none absolute top-5 right-5 z-10 rotate-6 rounded-md border-2 border-line-strong bg-card px-3 py-1 font-display text-lg font-bold text-fg"
         >
-          Maybe later
+          Skip
         </span>
 
         <CardBody activity={activity} />
