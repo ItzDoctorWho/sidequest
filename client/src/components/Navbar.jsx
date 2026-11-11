@@ -12,6 +12,14 @@ const navLinkClass = ({ isActive }) =>
     isActive ? 'bg-muted-fill text-fg' : 'text-fg-muted hover:bg-muted-fill hover:text-fg'
   }`;
 
+const getInitials = (name = '') => {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '?';
+  const first = parts[0][0];
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : '';
+  return (first + last).toUpperCase();
+};
+
 const Item = ({ to, icon: Icon, end, children }) => (
   <NavLink to={to} end={end} className={navLinkClass}>
     {({ isActive }) => (
@@ -75,6 +83,16 @@ export const Navbar = () => {
         )}
 
         <div className="flex items-center gap-1">
+          {isSignedIn && (
+            <span
+              className="mr-1 inline-flex size-9 shrink-0 select-none items-center justify-center rounded-full border border-line bg-muted-fill font-display text-sm font-bold text-accent"
+              title={user.name}
+              role="img"
+              aria-label={`Signed in as ${user.name}`}
+            >
+              {getInitials(user.name)}
+            </span>
+          )}
           <button
             type="button"
             onClick={() => dispatch(toggleTheme())}
