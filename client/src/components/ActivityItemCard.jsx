@@ -80,11 +80,6 @@ export const ActivityItemCard = ({ item }) => {
               Undo
             </button>
           )}
-          {item.status === 'skipped' && (
-            <button type="button" onClick={() => update({ status: 'saved' })} className="btn btn-outline btn-sm">
-              Accept quest
-            </button>
-          )}
           <button
             type="button"
             onClick={() => setIsEditingNotes(true)}
@@ -117,9 +112,8 @@ export const ActivityItemCard = ({ item }) => {
             >
               <Star
                 aria-hidden="true"
-                className={`size-5 ${
-                  (item.rating || 0) >= star ? 'fill-reward-fill text-reward-fill' : 'text-line-strong'
-                }`}
+                className={`size-5 ${(item.rating || 0) >= star ? 'fill-reward-fill text-reward-fill' : 'text-line-strong'
+                  }`}
               />
             </button>
           ))}

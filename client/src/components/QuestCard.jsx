@@ -85,7 +85,7 @@ const CardBody = ({ activity, interactive = true }) => {
 };
 
 /**
- * A quest waiting to be accepted. Drag or flick right to accept, left for "maybe later".
+ * A quest waiting to be accepted. Drag or flick right to accept, left to skip.
  * `next` is the quest queued behind it: it waits underneath and rises into place as you drag.
  * `instant` skips the entrance animation for cards that were already visible underneath.
  * Mount it with a `key` per quest so each card starts fresh.

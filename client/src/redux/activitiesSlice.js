@@ -77,7 +77,7 @@ const activitiesSlice = createSlice({
     items: [],
     status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
-    activeTab: 'saved' // 'saved' | 'done' | 'skipped'
+    activeTab: 'saved' // 'saved' | 'done'
   },
   reducers: {
     setActiveTab: (state, action) => {

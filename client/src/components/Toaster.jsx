@@ -21,7 +21,7 @@ const ToastItem = ({ toast }) => {
   }, [dispatch, toast.id, toast.action]);
 
   const handleAction = () => {
-    // Undo for accept / maybe later removes the record that was just created.
+    // Undo for accept removes the record that was just created.
     if (toast.action?.type === 'undo' && toast.action.activityId) {
       dispatch(deleteActivity(toast.action.activityId));
     }
@@ -32,9 +32,8 @@ const ToastItem = ({ toast }) => {
 
   return (
     <div
-      className={`enter pointer-events-auto flex items-center gap-3 rounded-md py-2 pr-2 pl-4 text-sm font-medium shadow-[var(--shadow-pop)] ${
-        TONE_CLASS[toast.tone] || TONE_CLASS.info
-      }`}
+      className={`enter pointer-events-auto flex items-center gap-3 rounded-md py-2 pr-2 pl-4 text-sm font-medium shadow-[var(--shadow-pop)] ${TONE_CLASS[toast.tone] || TONE_CLASS.info
+        }`}
     >
       {isSuccess && (
         <span className="relative flex size-5 shrink-0 items-center justify-center text-action" aria-hidden="true">
